@@ -21,6 +21,9 @@ var App = {
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
+    console.log(Messages._data);
+    Messages.getData();
+    // console.log(Messages.addToDatabase);
   },
 
   fetch: function(callback = ()=>{}) {
