@@ -22,7 +22,12 @@ var FormView = {
       username: 'yui/vivienne'
     };
 
-    Parse.create(message, 'congrats!', 'you failed...');
+    Parse.create(message, function() {
+      console.log('POST request made successfully');
+      App.fetch();
+    }, function() {
+      console.log('Failed to send POST');
+    });
 
     console.log('click!');
   },

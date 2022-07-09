@@ -9,6 +9,8 @@ var RoomsView = {
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
+    this.renderRoom('lobby');
+    this.renderRoom('test');
   },
 
   render: function() {
@@ -17,6 +19,13 @@ var RoomsView = {
 
   renderRoom: function(roomname) {
     // TODO: Render out a single room.
+    var compiled = _.template(
+      `<option value=${roomname}>
+        <%- roomname %>
+      </option>`
+    );
+
+    $('#rooms select').append(compiled({roomname: roomname}));
   },
 
   handleChange: function(event) {
@@ -25,6 +34,9 @@ var RoomsView = {
 
   handleClick: function(event) {
     // TODO: Handle the user clicking the "Add Room" button.
+    $('#rooms button').click(function() {
+      this.renderRoom('room1');
+    });
   }
 
 };
