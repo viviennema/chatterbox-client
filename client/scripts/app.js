@@ -18,23 +18,26 @@ var App = {
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
+    //setInterval(App.fetch, 3000);
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
-    console.log(Messages._data);
+
     // Messages.getData();
-    App.fetch();
+    // App.fetch();
     // console.log(Messages.addToDatabase);
   },
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
+      Messages.addMessages(data);
+
       MessagesView.render(data);
+      callback();
     });
   },
 
@@ -46,5 +49,7 @@ var App = {
   stopSpinner: function() {
     App.$spinner.fadeOut('fast');
     FormView.setStatus(false);
-  }
+  },
+
+
 };

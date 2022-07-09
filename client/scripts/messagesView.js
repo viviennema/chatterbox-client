@@ -12,38 +12,37 @@ var MessagesView = {
 
   },
 
-  render: function(message) {
+  render: function() {
     // TODO: Render _all_ the messages.
     var html = '';
 
-    for (var i = 0; i < message.length; i++) {
-      html += MessagesView.renderMessage(message[i]);
+    // console.log(Messages._data);
+    for (var i = 0; i < Messages._data.length; i++) {
+      html += MessagesView.renderMessage(Messages._data[i]);
     }
 
-    $('#chats').append(html);
+
+    $('#chats').html(html);
   },
 
   renderMessage: function(singleMsg) {
     // TODO: Render a single message.
-    var msgId = singleMsg.message_id;
-    var username = singleMsg.username || 'null';
-    var text = singleMsg.text || 'null';
+    var username = singleMsg.username || 'Anonymous';
+    var text = singleMsg.text || 'Empty Message';
 
-    for (var key in $('#chats')[0].children) {
-      if (!$('#chats')[0].children[key].id) {
-        var compiled = _.template(
-          '<div id="tweet_' + msgId + '">' +
-            '<div>' +
+    // for (var key in $('#chats')[0].children) {
+    //   if (!$('#chats')[0].children[key].id) {
+    var compiled = _.template(
+      '<div>' +
               '<%- username %>' +
             '</div>' +
             '<div>' +
               '<%- text %>' +
-            '</div>' +
-          '</div>'
-        );
-        return compiled(singleMsg);
-      }
-    }
+            '</div>'
+    );
+    return compiled(singleMsg);
+    // }
+    // }
   },
 
   handleClick: function(event) {

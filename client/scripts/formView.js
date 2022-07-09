@@ -7,6 +7,7 @@ var FormView = {
   $form: $('form'),
 
   initialize: function() {
+    FormView.refresh();
     FormView.$form.on('submit', FormView.handleSubmit);
   },
 
@@ -22,6 +23,10 @@ var FormView = {
       username: 'yui/vivienne'
     };
 
+    // // store locally
+    // Messages._data.unshift(message);
+
+    // store to the server
     Parse.create(message, function() {
       console.log('POST request made successfully');
       App.fetch();
@@ -29,12 +34,21 @@ var FormView = {
       console.log('Failed to send POST');
     });
 
+    // Messages._data.unshift(message);
+
+    // MessagesView.renderMessage(message);
+
+
+
     console.log('click!');
   },
 
   setStatus: function(active) {
     var status = active ? 'true' : null;
     // FormView.$form.find('input[type=submit]').attr('disabled', status);
-  }
+  },
 
+  refresh: function() {
+    setInterval(App.fetch, 1500);
+  }
 };
